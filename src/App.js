@@ -8,23 +8,52 @@ import clientMaker from "./assets/client-maker.svg";
 import imgHeroDesktop from "./assets/image-hero-desktop.png";
 import imgHeroMobile from "./assets/image-hero-mobile.png";
 
-const AppContainer = styled.div``;
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+`;
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+`;
 
-const TextContainer = styled.div``;
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
 
 const Heading = styled.h1``;
 
 const Paragraph = styled.p``;
 
-const Clients = styled.div``;
+const Clients = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Client = styled.img``;
 
-const ImgContainer = styled.div``;
+const ImgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
 
-const Img = styled.img``;
+const Img = styled.img`
+  width: 40vw;
+`;
 
 function renderClients(clients) {
   let key = 0;

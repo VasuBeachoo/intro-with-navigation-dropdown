@@ -7,19 +7,45 @@ import iconCalendar from "../assets/icon-calendar.svg";
 import iconReminders from "../assets/icon-reminders.svg";
 import iconPlanning from "../assets/icon-planning.svg";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
 
-export const Links = styled.div``;
+export const Links = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
-export const LinkContainer = styled.div``;
+export const LinkContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
 
-export const DropdownLink = styled.div``;
+export const DropdownLink = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Link = styled.p``;
 
 export const LinkIcon = styled.img``;
 
-export const Btns = styled.div``;
+export const Btns = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 function renderLinks(links) {
   let key = 0;
@@ -50,7 +76,7 @@ function renderBtns(btns) {
       case "button":
         return <Button key={key++}>{btn.label}</Button>;
       default:
-        return <></>;
+        return <div key={key++}></div>;
     }
   });
 }
