@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
 import Header from "./components/Header";
 import Button from "./components/Button";
 import clientDatabiz from "./assets/client-databiz.svg";
@@ -72,6 +73,7 @@ const App = () => {
 
   return (
     <AppContainer>
+      <GlobalStyle />
       <Header />
       <Container>
         <TextContainer>

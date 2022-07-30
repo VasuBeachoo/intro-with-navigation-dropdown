@@ -20,6 +20,7 @@ export const Links = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1.75rem;
 `;
 
 export const LinkContainer = styled.div`
@@ -34,9 +35,27 @@ export const DropdownLink = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 0.35rem;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export const Link = styled.p``;
+export const Link = styled.p`
+  user-select: none;
+  color: var(--Medium-Gray);
+  opacity: 0.7;
+  margin: 0;
+  transition: 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--Almost-Black);
+    opacity: 1;
+  }
+`;
 
 export const LinkIcon = styled.img``;
 
@@ -45,6 +64,7 @@ export const Btns = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1.75rem;
 `;
 
 function renderLinks(links) {
