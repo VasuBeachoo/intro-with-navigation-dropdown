@@ -23,6 +23,8 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  gap: 7.5rem;
+  padding: 1rem 8rem 3rem;
 `;
 
 const TextContainer = styled.div`
@@ -30,17 +32,32 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding-top: 5rem;
 `;
 
-const Heading = styled.h1``;
+const Heading = styled.h1`
+  color: var(--Almost-Black);
+  font-size: clamp(2.5rem, 8vw, 4.25rem);
+  max-width: 28rem;
+  margin: 0;
+`;
 
-const Paragraph = styled.p``;
+const Paragraph = styled.p`
+  color: var(--Medium-Gray);
+  font-size: 1.1rem;
+  letter-spacing: 0.025rem;
+  line-height: 1.85rem;
+  max-width: 45ch;
+  margin: 2.25rem 0;
+`;
 
 const Clients = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
+  margin-top: 5.25rem;
 `;
 
 const Client = styled.img``;
@@ -53,7 +70,7 @@ const ImgContainer = styled.div`
 `;
 
 const Img = styled.img`
-  width: 40vw;
+  width: 25rem;
 `;
 
 function renderClients(clients) {
