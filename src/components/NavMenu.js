@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import iconArrowDown from "../assets/icon-arrow-down.svg";
@@ -20,10 +21,11 @@ export const Links = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1.75rem;
+  gap: 2rem;
 `;
 
 export const LinkContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -37,6 +39,8 @@ export const DropdownLink = styled.div`
   align-items: center;
   gap: 0.35rem;
   user-select: none;
+  padding-bottom: 1.5rem;
+  margin-bottom: -1.5rem;
 
   &:hover {
     cursor: pointer;
@@ -57,6 +61,31 @@ export const Link = styled.p`
   }
 `;
 
+export const DropdownMenu = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  min-width: 8rem;
+  background-color: var(--White);
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  padding: 1.5rem;
+  transform: translateY(1.5rem);
+`;
+
+export const IconLink = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
 export const LinkIcon = styled.img``;
 
 export const Btns = styled.div`
@@ -72,12 +101,38 @@ function renderLinks(links) {
 
   return links.map((link) => {
     if (link.dropdownLinks) {
+      const [menu, setMenu] = useState(false);
+
       return (
-        <LinkContainer key={key++}>
+        <LinkContainer
+          key={key++}
+          onMouseOver={() => setMenu(true)}
+          onMouseLeave={() => setMenu(false)}
+        >
           <DropdownLink>
             <Link>{link.label}</Link>
-            <LinkIcon src={iconArrowDown} alt="down-arrow-icon" />
+            <LinkIcon
+              src={menu ? iconArrowUp : iconArrowDown}
+              alt={menu ? "up-arrow-icon" : "down-arrow-icon"}
+            />
           </DropdownLink>
+          {menu && (
+            <DropdownMenu>
+              {link.dropdownLinks.map((menuLink) => {
+                let dropdownKey = 1000;
+                if (menuLink.iconSrc) {
+                  return (
+                    <IconLink key={dropdownKey++}>
+                      <LinkIcon src={menuLink.iconSrc} alt={menuLink.iconAlt} />
+                      <Link>{menuLink.label}</Link>
+                    </IconLink>
+                  );
+                } else {
+                  return <Link>{menuLink.label}</Link>;
+                }
+              })}
+            </DropdownMenu>
+          )}
         </LinkContainer>
       );
     } else {

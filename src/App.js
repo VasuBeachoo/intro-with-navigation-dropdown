@@ -44,7 +44,7 @@ const Heading = styled.h1`
 
 const Paragraph = styled.p`
   color: var(--Medium-Gray);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: 0.025rem;
   line-height: 1.85rem;
   max-width: 45ch;
