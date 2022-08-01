@@ -98,6 +98,7 @@ export const Btns = styled.div`
 
 function renderLinks(links) {
   let key = 0;
+  let dropdownKey = 1000;
 
   return links.map((link) => {
     if (link.dropdownLinks) {
@@ -119,7 +120,6 @@ function renderLinks(links) {
           {menu && (
             <DropdownMenu>
               {link.dropdownLinks.map((menuLink) => {
-                let dropdownKey = 1000;
                 if (menuLink.iconSrc) {
                   return (
                     <IconLink key={dropdownKey++}>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Header from "./components/Header";
@@ -7,7 +8,6 @@ import clientAudiophile from "./assets/client-audiophile.svg";
 import clientMeet from "./assets/client-meet.svg";
 import clientMaker from "./assets/client-maker.svg";
 import imgHeroDesktop from "./assets/image-hero-desktop.png";
-import imgHeroMobile from "./assets/image-hero-mobile.png";
 
 const AppContainer = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const AppContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  overflow: hidden;
 `;
 
 const Container = styled.div`
@@ -25,6 +25,13 @@ const Container = styled.div`
   align-items: flex-start;
   gap: 7.5rem;
   padding: 1rem 8rem 3rem;
+
+  @media (max-width: 1000px) {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4rem;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -33,6 +40,12 @@ const TextContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 5rem;
+
+  @media (max-width: 1000px) {
+    align-items: center;
+    text-align: center;
+    padding-top: 0;
+  }
 `;
 
 const Heading = styled.h1`
@@ -44,7 +57,7 @@ const Heading = styled.h1`
 
 const Paragraph = styled.p`
   color: var(--Medium-Gray);
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
   letter-spacing: 0.025rem;
   line-height: 1.85rem;
   max-width: 45ch;
@@ -58,6 +71,16 @@ const Clients = styled.div`
   align-items: center;
   gap: 2rem;
   margin-top: 5.25rem;
+
+  @media (max-width: 1000px) {
+    margin-top: 4rem;
+  }
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 `;
 
 const Client = styled.img``;
@@ -88,10 +111,26 @@ const App = () => {
     { src: clientMaker, alt: "client-maker" },
   ];
 
+  const [mobile, setMobile] = useState(true);
+
+  function handleResize() {
+    if (window.innerWidth <= 1000) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  }
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
   return (
     <AppContainer>
       <GlobalStyle />
-      <Header />
+      <Header mobile={mobile} />
       <Container>
         <TextContainer>
           <Heading>Make remote work</Heading>

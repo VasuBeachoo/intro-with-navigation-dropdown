@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import NavMenu from "./NavMenu";
 import logo from "../assets/logo.svg";
+import iconMenu from "../assets/icon-menu.svg";
+import iconCloseMenu from "../assets/icon-close-menu.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -17,11 +19,15 @@ export const Logo = styled.img`
   margin: 0 4rem 0 0;
 `;
 
-const Header = () => {
+export const MenuIcon = styled.img`
+  margin-left: auto;
+`;
+
+const Header = ({ mobile }) => {
   return (
     <Container>
       <Logo src={logo} alt="logo" />
-      <NavMenu />
+      {mobile ? <MenuIcon src={iconMenu} alt="menu-open-icon" /> : <NavMenu />}
     </Container>
   );
 };
