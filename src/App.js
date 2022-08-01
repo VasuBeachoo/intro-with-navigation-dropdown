@@ -77,7 +77,7 @@ const Clients = styled.div`
     margin-top: 4rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
