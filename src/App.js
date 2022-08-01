@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Header from "./components/Header";
 import Button from "./components/Button";
+import MobileNav from "./components/MobileNav";
 import clientDatabiz from "./assets/client-databiz.svg";
 import clientAudiophile from "./assets/client-audiophile.svg";
 import clientMeet from "./assets/client-meet.svg";
@@ -93,7 +94,16 @@ const ImgContainer = styled.div`
 `;
 
 const Img = styled.img`
-  width: 25rem;
+  width: clamp(10rem, 75vw, 25rem);
+`;
+
+const DarkOverlay = styled.div`
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: var(--Black);
+  opacity: 0.5;
+  z-index: 2;
 `;
 
 function renderClients(clients) {
@@ -111,12 +121,14 @@ const App = () => {
     { src: clientMaker, alt: "client-maker" },
   ];
 
-  const [mobile, setMobile] = useState(true);
+  const [mobile, setMobile] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   function handleResize() {
     if (window.innerWidth <= 1000) {
       setMobile(true);
     } else {
+      setMenu(false);
       setMobile(false);
     }
   }
@@ -130,7 +142,7 @@ const App = () => {
   return (
     <AppContainer>
       <GlobalStyle />
-      <Header mobile={mobile} />
+      <Header mobile={mobile} menu={menu} setMenu={setMenu} />
       <Container>
         <TextContainer>
           <Heading>Make remote work</Heading>
@@ -145,6 +157,8 @@ const App = () => {
           <Img src={imgHeroDesktop} alt="hero-image" />
         </ImgContainer>
       </Container>
+      {menu && <MobileNav mobile={mobile} />}
+      {menu && <DarkOverlay />}
     </AppContainer>
   );
 };

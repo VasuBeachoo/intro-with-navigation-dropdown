@@ -8,6 +8,7 @@ const GlobalStyle = styled.createGlobalStyle`
     --Medium-Gray: hsl(0, 0%, 41%);
     --Almost-Black: hsl(0, 0%, 8%);
     --White: hsl(0, 0%, 100%);
+    --Black: hsl(0, 0%, 0%);
 
     --font: "Epilogue", sans-serif;
   }

@@ -62,20 +62,24 @@ export const Link = styled.p`
 `;
 
 export const DropdownMenu = styled.div`
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  min-width: 8rem;
-  background-color: var(--White);
   font-size: 0.95rem;
-  border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-  padding: 1.5rem;
-  transform: translateY(1.5rem);
+  padding: 1.5rem 0 0 0;
+
+  @media (min-width: 1000px) {
+    position: absolute;
+    min-width: 8rem;
+    background-color: var(--White);
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    padding: 1.5rem;
+    transform: translateY(1.5rem);
+  }
 `;
 
 export const IconLink = styled.div`
@@ -96,7 +100,7 @@ export const Btns = styled.div`
   gap: 1.75rem;
 `;
 
-function renderLinks(links) {
+function renderLinks(links, mobile) {
   let key = 0;
   let dropdownKey = 1000;
 
@@ -107,8 +111,9 @@ function renderLinks(links) {
       return (
         <LinkContainer
           key={key++}
-          onMouseOver={() => setMenu(true)}
-          onMouseLeave={() => setMenu(false)}
+          onMouseOver={mobile ? undefined : () => setMenu(true)}
+          onMouseLeave={mobile ? undefined : () => setMenu(false)}
+          onClick={mobile ? () => setMenu(!menu) : undefined}
         >
           <DropdownLink>
             <Link>{link.label}</Link>
@@ -156,7 +161,7 @@ function renderBtns(btns) {
   });
 }
 
-const NavMenu = () => {
+const NavMenu = ({ className, mobile }) => {
   const links = [
     {
       label: "Features",
@@ -189,8 +194,8 @@ const NavMenu = () => {
   ];
 
   return (
-    <Container>
-      <Links>{renderLinks(links)}</Links>
+    <Container className={className}>
+      <Links>{renderLinks(links, mobile)}</Links>
       <Btns>{renderBtns(btns)}</Btns>
     </Container>
   );

@@ -20,14 +20,34 @@ export const Logo = styled.img`
 `;
 
 export const MenuIcon = styled.img`
+  position: ${(props) => (props.menu ? "fixed" : "static")};
+  right: 3.25rem;
   margin-left: auto;
+  z-index: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 1000px) {
+    z-index: 4;
+  }
 `;
 
-const Header = ({ mobile }) => {
+const Header = ({ mobile, menu, setMenu }) => {
   return (
     <Container>
       <Logo src={logo} alt="logo" />
-      {mobile ? <MenuIcon src={iconMenu} alt="menu-open-icon" /> : <NavMenu />}
+      {mobile ? (
+        <MenuIcon
+          src={menu ? iconCloseMenu : iconMenu}
+          alt={menu ? "menu-close-icon" : "menu-open-icon"}
+          onClick={() => setMenu(!menu)}
+          menu={menu}
+        />
+      ) : (
+        <NavMenu mobile={mobile} />
+      )}
     </Container>
   );
 };
